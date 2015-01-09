@@ -40,8 +40,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self togglePlayer];
-// do we need this
 
     self.whichPlayerLabel.backgroundColor = [UIColor blueColor];
     self.xColor = [UIColor blueColor];
@@ -53,7 +51,6 @@
     self.whichPlayerLabel.text = self.turnStatus;
 
     self.labelArray = @[self.labelOne, self.labelTwo, self.labelThree, self.labelFour, self.labelFive,self.labelSix, self.labelSeven, self.labelEight, self.labelNine];
-
 }
 
 - (void) togglePlayer {
@@ -78,7 +75,6 @@
 - (IBAction)onLabelTapped:(UITapGestureRecognizer *)sender {
 
     CGPoint point = [sender locationInView:self.view];
-//    self.whichPlayerLabel.center = point;
 
     self.touchLocation = [sender locationInView:self.view];
 
@@ -87,6 +83,7 @@
 
 
             if ([label.text isEqualToString:@""]) {
+
                 label.text = self.turnStatus;
                 self.whichPlayerLabel.text = self.turnStatus;
 
@@ -97,13 +94,9 @@
                     label.backgroundColor = self.oColor;
                 }
                 [self togglePlayer];
-
             }
-
-
         }
     }
-
 }
 
 

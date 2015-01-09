@@ -41,8 +41,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self togglePlayer];
+// do we need this
 
-    self.whichPlayerLabel.backgroundColor = [UIColor redColor];
+    self.whichPlayerLabel.backgroundColor = [UIColor blueColor];
     self.xColor = [UIColor blueColor];
     self.oColor = [UIColor redColor];
     self.xString = @"X";
@@ -58,10 +59,12 @@
 - (void) togglePlayer {
     if ([self.turnStatus isEqualToString:self.xString]) {
         self.turnStatus = self.oString;
+
         self.whichPlayerLabel.text = self.oString;
         self.whichPlayerLabel.backgroundColor = self.oColor;
     } else {
         self.turnStatus = self.xString;
+
         self.whichPlayerLabel.text = self.xString;
         self.whichPlayerLabel.backgroundColor = self.xColor;
     }
@@ -86,7 +89,6 @@
             if ([label.text isEqualToString:@""]) {
                 label.text = self.turnStatus;
                 self.whichPlayerLabel.text = self.turnStatus;
-                NSLog(@"%@", label.text);
 
 
                 if ([self.whichPlayerLabel.text isEqualToString:self.xString]) {

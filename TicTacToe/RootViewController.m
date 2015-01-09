@@ -10,6 +10,7 @@
 
 @interface RootViewController ()
 
+@property (strong, nonatomic) IBOutlet UILabel *boardBackgroundLabel;
 @property (strong, nonatomic) IBOutlet UILabel *labelOne;
 @property (strong, nonatomic) IBOutlet UILabel *labelTwo;
 @property (strong, nonatomic) IBOutlet UILabel *labelThree;
@@ -25,8 +26,8 @@
 @property CGPoint touchLocation;
 
 @property NSString *turnStatus;
-@property NSString *xString;
-@property NSString *oString;
+@property NSString *playerX;
+@property NSString *playerO;
 @property NSString *stringToPlace;
 @property NSString *whoWon;
 @property UIColor *xColor;
@@ -44,29 +45,30 @@
     self.whichPlayerLabel.backgroundColor = [UIColor blueColor];
     self.xColor = [UIColor blueColor];
     self.oColor = [UIColor redColor];
-    self.xString = @"X";
-    self.oString = @"O";
+    self.playerX = @"X";
+    self.playerO = @"O";
 
-    self.turnStatus = self.xString;
+    self.turnStatus = self.playerX;
     self.whichPlayerLabel.text = self.turnStatus;
 
     self.labelArray = @[self.labelOne, self.labelTwo, self.labelThree, self.labelFour, self.labelFive,self.labelSix, self.labelSeven, self.labelEight, self.labelNine];
 }
 
 - (void) togglePlayer {
-    if ([self.turnStatus isEqualToString:self.xString]) {
-        self.turnStatus = self.oString;
+    if ([self.turnStatus isEqualToString:self.playerX]) {
+        self.turnStatus = self.playerO;
 
-        self.whichPlayerLabel.text = self.oString;
+        self.whichPlayerLabel.text = self.playerO;
         self.whichPlayerLabel.backgroundColor = self.oColor;
     } else {
-        self.turnStatus = self.xString;
+        self.turnStatus = self.playerX;
 
-        self.whichPlayerLabel.text = self.xString;
+        self.whichPlayerLabel.text = self.playerX;
         self.whichPlayerLabel.backgroundColor = self.xColor;
     }
 
 }
+
 
 - (void)findLabelUsingPoint:(CGPoint)point{
 
@@ -88,7 +90,7 @@
                 self.whichPlayerLabel.text = self.turnStatus;
 
 
-                if ([self.whichPlayerLabel.text isEqualToString:self.xString]) {
+                if ([self.whichPlayerLabel.text isEqualToString:self.playerX]) {
                     label.backgroundColor = self.xColor;
                 } else {
                     label.backgroundColor = self.oColor;
@@ -98,8 +100,6 @@
         }
     }
 }
-
-
 
 
 

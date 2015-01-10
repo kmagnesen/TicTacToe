@@ -10,6 +10,9 @@
 
 @interface RootViewController ()
 
+@property (strong, nonatomic) IBOutlet UIButton *resetButton;
+
+
 @property (strong, nonatomic) IBOutlet UILabel *boardBackgroundLabel;
 @property (strong, nonatomic) IBOutlet UILabel *labelOne;
 @property (strong, nonatomic) IBOutlet UILabel *labelTwo;
@@ -69,8 +72,28 @@
 
 }
 
+- (void)displayWinner {
+    NSString *winner;
+    NSString *winnerMsg = [NSString stringWithFormat:@"%@ WINS! YEAHHHHH BUDDDDY!!!", winner];
+
+    UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:winnerMsg message:@"Yeah Buddy!!!" delegate:self cancelButtonTitle:@"Thank You For Playing!" otherButtonTitles:nil];
+    [winnerAlert show];
+}
 
 - (void)findLabelUsingPoint:(CGPoint)point{
+
+}
+
+-(void)resetBoard{
+    self.labelOne.text = NULL;
+    self.labelTwo.text = NULL;
+    self.labelThree.text = NULL;
+    self.labelFour.text = NULL;
+    self.labelFive.text = NULL;
+    self.labelSix.text = NULL;
+    self.labelSeven.text = NULL;
+    self.labelEight.text = NULL;
+    self.labelNine.text = NULL;
 
 }
 
@@ -91,15 +114,17 @@
 
 
                 if ([self.whichPlayerLabel.text isEqualToString:self.playerX]) {
-                    label.backgroundColor = self.xColor;
+                    label.textColor = self.xColor;
                 } else {
-                    label.backgroundColor = self.oColor;
+                    label.textColor = self.oColor;
                 }
                 [self togglePlayer];
+
             }
         }
     }
 }
+
 
 
 

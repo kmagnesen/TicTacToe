@@ -7,11 +7,9 @@
 //
 
 #import "RootViewController.h"
+#import "WebViewController.h"
 
 @interface RootViewController ()
-
-@property (strong, nonatomic) IBOutlet UIButton *resetButton;
-
 
 @property (strong, nonatomic) IBOutlet UILabel *boardBackgroundLabel;
 @property (strong, nonatomic) IBOutlet UILabel *labelOne;
@@ -45,16 +43,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.whichPlayerLabel.backgroundColor = [UIColor blueColor];
     self.xColor = [UIColor blueColor];
     self.oColor = [UIColor redColor];
     self.playerX = @"X";
     self.playerO = @"O";
 
-    self.turnStatus = self.playerX;
-    self.whichPlayerLabel.text = self.turnStatus;
+    [self whoGoesFirst];
+
+//    self.turnStatus = self.playerX;
+    self.turnStatus = self.whichPlayerLabel.text;
 
     self.labelArray = @[self.labelOne, self.labelTwo, self.labelThree, self.labelFour, self.labelFive,self.labelSix, self.labelSeven, self.labelEight, self.labelNine];
+
+
 }
 
 - (void) togglePlayer {
@@ -80,21 +81,42 @@
     [winnerAlert show];
 }
 
-- (void)findLabelUsingPoint:(CGPoint)point{
-
+- (IBAction)onResetButtonTapped:(UIButton *)sender {
+    for (UILabel *label in self.labelArray) {
+        label.text = @"";
+    }
+    [self whoGoesFirst];
 }
 
--(void)resetBoard{
-    self.labelOne.text = NULL;
-    self.labelTwo.text = NULL;
-    self.labelThree.text = NULL;
-    self.labelFour.text = NULL;
-    self.labelFive.text = NULL;
-    self.labelSix.text = NULL;
-    self.labelSeven.text = NULL;
-    self.labelEight.text = NULL;
-    self.labelNine.text = NULL;
+- (void)setPlayer:(NSString *)player {
+    if ([player isEqualToString:self.playerX]) {
+        self.whichPlayerLabel.backgroundColor = self.xColor;
+        self.whichPlayerLabel.text = self.playerX;
+    } else {
+        self.whichPlayerLabel.backgroundColor = self.oColor;
+        self.whichPlayerLabel.text = self.playerO;
+    }
+}
 
+- (NSString *)whoGoesFirst {
+    int random = arc4random_uniform(2);
+    if (random == 1) {
+        self.turnStatus = self.playerX;
+    } else {
+        self.turnStatus = self.playerO;
+    }
+
+    [self setPlayer:self.turnStatus];
+    return self.turnStatus;
+}
+
+//win logic
+//1)Get index of label from label array
+//2)Substitute player token into combo array
+//3)look for a winning combination
+
+- (void)findLabelUsingPoint:(CGPoint)point{
+    
 }
 
 - (IBAction)onLabelTapped:(UITapGestureRecognizer *)sender {
